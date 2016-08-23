@@ -1,18 +1,18 @@
 from django.db import models
-from django_enumfield import enum
+from enumfields import EnumIntegerField
+from enumfields import Enum  # Uses Ethan Furman's "enum34" backport
 
 
 # Create your models here.
 
 
-class GenderEnum(enum.Enum):
+class GenderEnum(Enum):
     MALE = 1
     FEMALE = 2
 
-    labels = {
-        MALE: 'Male',
-        FEMALE: 'Female',
-    }
+    class Labels:
+        MALE = 'Male'
+        FEMALE = 'Female'
 
 
 class Breed(models.Model):
@@ -32,7 +32,7 @@ class CatColor(models.Model):
 
 class Cat(models.Model):
     breed = models.ForeignKey(Breed)
-    sex = enum.EnumField(GenderEnum)
+    sex = EnumIntegerField(GenderEnum)
     cat_color = models.ForeignKey(CatColor)
     date = models.DateField()
     desc = models.CharField(max_length=256)
