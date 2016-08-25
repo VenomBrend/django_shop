@@ -1,10 +1,14 @@
-from django.conf.urls import include, url
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = [
-    # Examples:
-    # url(r'^$', 'django_shop.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+from .settings import MEDIA_ROOT, DEBUG
 
+
+urlpatterns = patterns('',    
     url(r'^admin/', include(admin.site.urls)),
-]
+    )
+
+if DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': MEDIA_ROOT}))
