@@ -1,9 +1,12 @@
 from django.db import models
 from enumfields import EnumIntegerField
 from enumfields import Enum  # Uses Ethan Furman's "enum34" backport
+import parser_breeds
 
 
-# Create your models here.
+BREEDS= parser_breeds.get_breeds()
+
+
 
 
 class GenderEnum(Enum):

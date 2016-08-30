@@ -8,7 +8,12 @@ setup(
                       'six=1.10.0',
                       'enum34=1.1.6',
                       'django-enumfields==0.8.2',
-                      'Pillow==3.3.1'
+                      'Pillow==3.3.1',
+                      'lxml==3.6.4',
+                      'cssselect==0.9.2',
+                      'pyquery==1.2.13',
+
+
                       ],
     description='Cats Shop on Django',
 )
