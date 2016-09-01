@@ -39,8 +39,13 @@ class Cat(models.Model):
     cat_color = models.ForeignKey(CatColor)
     date = models.DateField()
     desc = models.CharField(max_length=256)
-    photo = models.ImageField(upload_to='cats')
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
         return str(self.id)
+
+
+class Album(models.Model):
+    cat = models.ForeignKey(Cat)
+    photo = models.ImageField(upload_to='cats')
+
