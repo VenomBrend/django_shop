@@ -1,4 +1,10 @@
-from urllib.request import urlopen
+import sys
+
+if sys.version.startswith('2'):
+    from urllib2 import urlopen
+else:
+    from urllib.request import urlopen
+
 from lxml.html import fromstring
 from pyquery import PyQuery as pq
 
