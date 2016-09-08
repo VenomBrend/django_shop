@@ -19,14 +19,14 @@ class CatAdmin(admin.ModelAdmin):
 
 
 class OrderPositionInline(admin.TabularInline):
-	model = OrderPosition
-	extra = 1
+    model = OrderPosition
+    extra = 1
 
 
 class OrderAdmin(admin.ModelAdmin):
-	inlines = [OrderPositionInline,]
-	readonly_fields = ['created', 'closed']
-	list_display = ('id', 'price', 'customer', 'created')
+    inlines = [OrderPositionInline, ]
+    readonly_fields = ['created', 'closed']
+    list_display = ('id', 'price', 'customer', 'created')
 
 
 admin.site.register(Breed, BreedAdmin)
