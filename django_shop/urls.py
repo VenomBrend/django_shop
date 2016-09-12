@@ -1,14 +1,14 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 
-from .settings import MEDIA_ROOT, DEBUG
 
-
-urlpatterns = patterns('',    
+urlpatterns = [    
     url(r'^admin/', include(admin.site.urls)),
+    ] + static(
+        settings.STATIC_URL
+    ) + static(
+        settings.MEDIA_URL, 
+        document_root=settings.MEDIA_ROOT
     )
-
-if DEBUG:
-    urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': MEDIA_ROOT}))
