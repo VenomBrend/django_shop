@@ -26,8 +26,9 @@ def parse_breed(url, item_path):
 def filling_breeds(apps, schema_editor):
     breeds_list = parse_breed(URL, ITEM_PATH)
     for breed in breeds_list:
-        b = Breed(name=breed)
-        b.save()
+        if(breed != None):
+            b = Breed(name=breed, desc = None)
+            b.save()
 
 
 class Migration(migrations.Migration):
