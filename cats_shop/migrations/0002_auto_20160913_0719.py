@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models, migrations
-from cats_shop.models import Breed
 from urllib.request import urlopen
+#from urllib2 import urlopen
 from lxml.html import fromstring
 from pyquery import PyQuery as pq
 
@@ -25,10 +25,12 @@ def parse_breed(url, item_path):
 
 def filling_breeds(apps, schema_editor):
     breeds_list = parse_breed(URL, ITEM_PATH)
+    Breed = apps.get_model('cats_shop', 'Breed')
+    db_alias = schema_editor.connection.alias    
     for breed in breeds_list:
-        if(breed != None):
-            b = Breed(name=breed, desc = None)
-            b.save()
+        if breed != None:
+            Breed.objects.using(db_alias).create(name=breed, desc='')
+            
 
 
 class Migration(migrations.Migration):
