@@ -18,8 +18,8 @@ class GenderEnum(Enum):
 
 
 class Breed(models.Model):
-    name = models.CharField(max_length=50)
-    desc = models.CharField(max_length=256, blank=True)
+    name = models.CharField(max_length=50,null=True)
+    desc = models.CharField(max_length=256,blank=True, null=True)
 
     def __str__(self):
         return self.name
