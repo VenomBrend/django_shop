@@ -10,14 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Item - Start Bootstrap Template</title>
+    <title>About</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'cats_shop/css/bootstrap.min.css' %}" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'cats_shop/css/shop-item.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'cats_shop/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'cats_shop/shop-item.css' %}" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/shop">Meow!</a>
+                <a class="navbar-brand" href="/">Meow!</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -84,17 +83,19 @@
             </div>
 
 
-            <div class="col-md-9">
-
-                <div class="thumbnail2">
-                    <img class="img-responsive" src="{{ cat.photo.url }}" alt="">
+            <div class="col-md-6">
+                {% for album in cat.album_set.all %}
+                <div class="thumbnail">
+                    <img class="img-responsive" src="{{ album.photo.url }}" alt="">
+                    <br>
+                    {% endfor %}
                     <div class="caption-full">
-                        <h4 class="pull-right">{{cat.cat.price}}$</h4>
-                        <h4><a href="#">Breed: {{cat.cat.breed}}</a></h4>
-                        <p>About: {{cat.cat.desc}}</p>
-                        <p>Sex: {{cat.cat.sex}}</p>
-                        <p>Color: {{cat.cat.cat_color}}</p>
-                        <p>Date added: {{cat.cat.date}}</p>
+                        <h4 class="pull-right">{{cat.price}}$</h4>
+                        <h4>Breed: {{cat.breed}}</h4>
+                        <p>About: {{cat.desc}}</p>
+                        <p>Sex: {{cat.sex}}</p>
+                        <p>Color: {{cat.cat_color}}</p>
+                        <p>Date added: {{cat.date}}</p>
                     </div>
                     <!--  <div class="ratings">
                           <p class="pull-right">3 reviews</p>
@@ -129,50 +130,10 @@
                               <p>This product was great in terms of quality. I would definitely buy another!</p>
                           </div>
                       </div>
-
-                      <hr>
-
-                      <div class="row">
-                          <div class="col-md-12">
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star-empty"></span>
-                              Anonymous
-                              <span class="pull-right">12 days ago</span>
-                              <p>I've alredy ordered another one!</p>
-                          </div>
-                      </div>
-
-                      <hr>
-
-                      <div class="row">
-                          <div class="col-md-12">
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star-empty"></span>
-                              Anonymous
-                              <span class="pull-right">15 days ago</span>
-                              <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                          </div>
-                      </div>
-
                   </div>
 
-              </div>
-
-          </div>
-
-      </div>
-
-
       <div class="container">
-
           <hr>
-
           <!-- Footer -->
                     <!-- <footer>
                          <div class="row">
@@ -181,15 +142,14 @@
                              </div>
                          </div>
                      </footer>-->
-
-                 </div>
+                  <!-- </div>-->
                  <!-- /.container -->
 
     <!-- jQuery -->
-    <script type="text/javascript" src="{% static 'cats_shop/js/jquery.js' %}"></script>
+    <!--<script type="text/javascript" src="{% static 'cats_shop/js/jquery.js' %}"></script>-->
 
     <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" src="{% static 'cats_shop/js/bootstrap.min.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 </body>
 
