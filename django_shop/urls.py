@@ -4,8 +4,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 
-urlpatterns = [    
+urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('cats_shop.urls', namespace="cats_shop")),
     ] + static(
         settings.STATIC_URL
     ) + static(

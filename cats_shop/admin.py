@@ -1,11 +1,6 @@
 from django.contrib import admin
 from .models import Breed, CatColor, Cat, Album, Order, OrderPosition
 
-
-class BreedAdmin(admin.ModelAdmin):
-    fields = ['name', 'desc']
-
-
 class AlbumInline(admin.TabularInline):
     model = Album
     extra = 1
@@ -29,7 +24,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'price', 'customer', 'created')
 
 
-admin.site.register(Breed, BreedAdmin)
+admin.site.register(Breed)
 admin.site.register(CatColor)
 admin.site.register(Cat, CatAdmin)
 admin.site.register(Order, OrderAdmin)
