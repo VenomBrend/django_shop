@@ -37,7 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cats_shop'
+    'cats_shop',
+    'carton',
+    'cart',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,3 +108,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'cats_shop/media')
+
+
+CART_PRODUCT_MODEL = os.path.join(BASE_DIR, 'cats_shop.models.Cat')
