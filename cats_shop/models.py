@@ -64,7 +64,14 @@ class Order(models.Model):
                                     verbose_name='Is closed')
     is_shipped = models.BooleanField(default=False,
                                      verbose_name='Is shipped')
-    customer = models.ForeignKey(User)
+    customer = models.ForeignKey(User, null=True)
+    phone = models.CharField(max_length=32,
+                             null=True)
+    address = models.CharField(max_length=256,
+                               null=True)
+    name = models.CharField(max_length=64,
+                            verbose_name='Contact name',
+                            null=True)
 
     def price(self):
         return sum(p.price() for p in self.positions.all())

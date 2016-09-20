@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models, migrations
-from urllib.request import urlopen
-#from urllib2 import urlopen
+#from urllib.request import urlopen
+from urllib2 import urlopen
 from lxml.html import fromstring
 from pyquery import PyQuery as pq
 
