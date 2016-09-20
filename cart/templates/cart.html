@@ -1,0 +1,67 @@
+{% extends "cats_shop/base.html" %}
+
+{% block meta_title %}Sopping Cart{% endblock meta_title%}
+
+{% block content %}
+    
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <div class="col-xs-12">
+        <h3>Shopping Cart</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      {% if request.GET.status_message %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ request.GET.status_message }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if cart.items %}
+    <div class="row" id="table">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ item.product.breed }}</td>
+            <td>{{ item.price }}</td>
+            <td><a class="btn btn-default" href="{% url "cart:shopping-cart-remove" item.product.id %}" role="button">Delete</a></td>
+          {% endfor %}
+          </tr>          
+        </tbody>
+      </table>
+        <div class="col-xs-9">
+          <h4>Total Price: {{ cart.total }}</h4>
+        </div>
+        <div class="col-xs-3">
+          <a class="btn btn-primary" href="{% url "cats_shop:order" %}">Process Order</a>
+          <a class="btn btn-link" href="{% url "cart:shopping-cart-clear" %}">Clear All</a></td>
+        </div>      
+      </div>
+    </div>
+  {% else %}
+    <div class="row">
+      <div class="col-lg-12">
+        <h4>Your cart is empty.</h4>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock content %}

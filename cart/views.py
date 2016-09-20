@@ -3,27 +3,40 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 
 from carton.cart import Cart
-from ..cats_shop.models import Cat
+from cats_shop.models import Cat
 
 
-def add_to_cart(request):
+def add_to_cart(request, id):
     cart = Cart(request.session)
-    cat = Cat.objects.get(id=request.GET.get('id'))
-    cart.add(cat, price=cat.price)
-    message = 'Cat was added to shopping cart'
+    cat = Cat.objects.get(id=id)
+    if cat not in cart:
+        cart.add(cat, price=cat.price)
+        message = 'Cat was added to shopping cart'
+    else:
+        message = 'Cat already in the shopping cart'
     if 'cat' in request.path:
         return HttpResponseRedirect(reverse('cat'), message)
     else:
-        return HttpResponseRedirect(reverse('index'), message)
+        return HttpResponseRedirect(
+            '{}?status_message={}'.format(reverse('cats_shop:index'),
+                                          message))
 
 
-def remove_from_cart(request):
+def remove_from_cart(request, id):
     cart = Cart(request.session)
-    cat = Cat.objects.get(id=request.GET.get('id'))
+    cat = Cat.objects.get(id=id)
     cart.remove(cat)
     message = 'Cat was removed from shopping cart'
-    render(request, 'cart/show-cart.html', {'message': message})
+    return HttpResponseRedirect(
+            '{}?status_message={}'.format(reverse('cart:shopping-cart-show'),
+                                          message))
 
 
 def show_cart(request):
-    return render(request, 'cart/show-cart.html')
+    return render(request, 'cart.html')
+
+
+def clear_all(request):
+    cart = Cart(request.session)
+    cart.clear()
+    return render(request, 'cart.html')
