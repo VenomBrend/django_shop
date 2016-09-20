@@ -1,0 +1,23 @@
+{% extends "cats_shop/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block meta_title%}Order Processing{% endblock meta_title %}
+
+<div class="row">
+  <div class="col-xs-12">
+    {% if request.GET.status_message %}
+      <div class="alert alert-warning" role="alert">
+        {{ request.GET.status_message }}
+      </div>
+    {% endif %}         
+  </div>
+</div>
+
+{% block content %}
+
+<div class="container"> 
+  {% crispy form %}
+</div>   
+  
+{% endblock content %}     

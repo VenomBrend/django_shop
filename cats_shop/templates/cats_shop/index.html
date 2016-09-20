@@ -22,6 +22,16 @@
             </div>
         </div>
         <!-- /.row -->
+        <div class="row">
+          <div class="col-xs-12">          
+          {% if request.GET.status_message %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ request.GET.status_message }}
+            </div>
+          {% endif %}
+          </div>
+        </div>
 
 
         <!-- Page Features -->
@@ -38,7 +48,7 @@
                         <h3>{{cat.breed}}</h3>
                         <p>{{cat.breed.desc}}</p>
                         <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="cat/{{ cat.pk }}" class="btn btn-default">More Info</a>
+                            <a href="{% url "cart:shopping-cart-add" cat.id %}" class="btn btn-primary">Add to Cart</a> <a href="cat/{{ cat.pk }}" class="btn btn-default">More Info</a>
                         </p>
                     </div>
                 </div>
