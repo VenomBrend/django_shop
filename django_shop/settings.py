@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'cats_shop',
     'carton',
     'cart',
@@ -110,4 +111,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'cats_shop/media')
 
 
-CART_PRODUCT_MODEL = os.path.join(BASE_DIR, 'cats_shop.models.Cat')
+CART_PRODUCT_MODEL = 'cats_shop.models.Cat'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
