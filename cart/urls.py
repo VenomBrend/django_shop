@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from views import add_to_cart, remove_from_cart, show_cart, clear_all
+from cart.views import add_to_cart, remove_from_cart, show_cart, clear_all
 
 
 urlpatterns = [
