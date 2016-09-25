@@ -64,7 +64,9 @@ class Order(models.Model):
                                     verbose_name='Is closed')
     is_shipped = models.BooleanField(default=False,
                                      verbose_name='Is shipped')
-    customer = models.ForeignKey(User, null=True)
+    customer = models.ForeignKey(User,
+                                 blank=True,
+                                 null=True)
     phone = models.CharField(max_length=32,
                              null=True)
     address = models.CharField(max_length=256,

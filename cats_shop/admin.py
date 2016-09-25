@@ -20,7 +20,7 @@ class OrderPositionInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderPositionInline, ]
-    readonly_fields = ['created', 'closed']
+    readonly_fields = ['created',]
     list_display = ('id', 'price', 'customer', 'created')
 
 

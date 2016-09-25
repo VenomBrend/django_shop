@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, FormView
 
 from .models import Album, Cat, Order, OrderPosition
 from .forms import OrderForm
@@ -18,7 +18,7 @@ class CatDetail(DetailView):
     template_name = 'cats_shop/detail.html'
 
 
-class OrderAddView(CreateView):
+class OrderAddView(FormView):
     model = Order
     template_name = 'cats_shop/order_add.html'
     form_class = OrderForm
@@ -38,7 +38,7 @@ class OrderAddView(CreateView):
             order = form.save(commit=False)
             order.user = None
             if form.is_valid():
-                order.save()
+                form.save()
             cart = Cart(request.session)
             for item in cart.items:
                 order_item = OrderPosition()
