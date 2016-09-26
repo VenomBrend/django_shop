@@ -12,6 +12,8 @@ setup(
                       'lxml==3.6.4',
                       'cssselect==0.9.2',
                       'pyquery==1.2.13',
+                      'django-carton==1.2.1',
+                      'django-crispy-forms==1.6.0',
                       ],
     description='Cats Shop on Django',
 )
