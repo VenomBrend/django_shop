@@ -51,11 +51,14 @@
                 <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="#">Logout</a>
+                        <a href="/logout">Logout ({{ user }})</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="#">Login/Register</a>
+                        <a href="/login/">Login</a>
+                    </li>
+                    <li>
+                        <a href="/register/">New customer</a>
                     </li>
                 {% endif %}
                     <li {% if cart.count > 0 %}class="active"{% endif %}>
