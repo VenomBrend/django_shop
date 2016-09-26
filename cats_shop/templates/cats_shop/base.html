@@ -51,11 +51,11 @@
                 <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="/logout">Logout ({{ user }})</a>
+                        <a href="/logout">Log out ({{ user }})</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/login/">Login</a>
+                        <a href="/login/">Log in</a>
                     </li>
                     <li>
                         <a href="/register/">New customer</a>

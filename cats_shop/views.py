@@ -6,6 +6,9 @@ from .models import Album, Cat, Order, OrderPosition
 from .forms import OrderForm
 from carton.cart import Cart
 
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
+
 
 class CatsList(ListView):
     queryset = Cat.objects.order_by('-date')
@@ -47,3 +50,20 @@ class OrderAddView(FormView):
                 order_item.save()
             cart.clear()
             return super(OrderAddView, self).post(request, *args, **kwargs)
+
+
+class LoginFormView(FormView):
+    form_class = AuthenticationForm
+    template_name = "cats_shop/login.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        self.user = form.get_user()
+        login(self.request, self.user)
+        return super(LoginFormView, self).form_valid(form)
+
+
+class LogoutView(ListView):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect("/")
