@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^checkout/$', views.OrderAddView.as_view(), name='order'),
     url(r'^login/$', views.LoginFormView.as_view(), name='login'),
     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
-    
+    url(r'^register/$', views.RegisterFormView.as_view(), name='register'),
     ]

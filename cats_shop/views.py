@@ -6,7 +6,7 @@ from .models import Album, Cat, Order, OrderPosition
 from .forms import OrderForm
 from carton.cart import Cart
 
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout
 
 
@@ -67,3 +67,16 @@ class LogoutView(ListView):
     def get(self, request):
         logout(request)
         return HttpResponseRedirect("/")
+
+
+class RegisterFormView(FormView):
+    form_class = UserCreationForm
+    success_url = "/login/"
+    template_name = "cats_shop/register.html"
+
+    def form_valid(self, form):
+        # Создаём пользователя, если данные в форму были введены корректно.
+        form.save()
+
+        # Вызываем метод базового класса
+        return super(RegisterFormView, self).form_valid(form)
