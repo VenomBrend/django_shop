@@ -1,0 +1,36 @@
+{% extends "cats_shop/base.html" %}
+
+{% block meta_title %}Register new customer {% endblock meta_title%}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <div class="col-xs-12">
+        <h3>Register new customer</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      {% if request.GET.status_message %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ request.GET.status_message }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <form action="{% url 'cats_shop:register' %}" class="form-horizontal" method="post">
+    {% csrf_token  %}
+    {{ form.as_p }}
+    <button type="submit">Create account</button>
+  </form>
+</div>
+
+{% endblock content %}
+
+

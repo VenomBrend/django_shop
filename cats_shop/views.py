@@ -62,6 +62,17 @@ class LoginFormView(FormView):
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
 
+    def form_invalid(self, form):
+        user_name = self.request.POST['username']
+        user_password = self.request.POST['password']
+
+        if user_name or user_password == '':
+            message = "Enter your login and password"
+        else:
+            message = "Password incorrect or account not available"
+        return HttpResponseRedirect(
+            '{}?status_message={}'.format(reverse('cats_shop:login'), message))
+
 
 class LogoutView(ListView):
     def get(self, request):
@@ -75,8 +86,5 @@ class RegisterFormView(FormView):
     template_name = "cats_shop/register.html"
 
     def form_valid(self, form):
-        # Создаём пользователя, если данные в форму были введены корректно.
         form.save()
-
-        # Вызываем метод базового класса
         return super(RegisterFormView, self).form_valid(form)
