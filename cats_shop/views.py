@@ -3,11 +3,10 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView, DetailView, FormView
 
 from .models import Album, Cat, Order, OrderPosition
-from .forms import OrderForm
+from .forms import OrderForm, RegistrationForm, LoginForm
 from carton.cart import Cart
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout
+from django.contrib.auth import authenticate, login, logout
 
 
 class CatsList(ListView):
@@ -53,35 +52,30 @@ class OrderAddView(FormView):
 
 
 class LoginFormView(FormView):
-    form_class = AuthenticationForm
+    form_class = LoginForm
     template_name = "cats_shop/login.html"
     success_url = "/"
 
     def form_valid(self, form):
-        self.user = form.get_user()
-        login(self.request, self.user)
-        return super(LoginFormView, self).form_valid(form)
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
 
-    def form_invalid(self, form):
-        user_name = self.request.POST['username']
-        user_password = self.request.POST['password']
-
-        if user_name or user_password == '':
-            message = "Enter your login and password"
+        if user is not None and user.is_active:
+            login(self.request, user)
+            return super(LoginFormView, self).form_valid(form)
         else:
-            message = "Password incorrect or account not available"
-        return HttpResponseRedirect(
-            '{}?status_message={}'.format(reverse('cats_shop:login'), message))
+            return self.form_invalid(form)
 
 
 class LogoutView(ListView):
     def get(self, request):
         logout(request)
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(reverse('cats_shop:index'))
 
 
 class RegisterFormView(FormView):
-    form_class = UserCreationForm
+    form_class = RegistrationForm
     success_url = "/login/"
     template_name = "cats_shop/register.html"
 

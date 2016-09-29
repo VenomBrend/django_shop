@@ -51,14 +51,14 @@
                 <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="/logout">Log out ({{ user }})</a>
+                        <a href="{% url "cats_shop:logout" %}">Log out ({{ user }})</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/login/">Log in</a>
+                        <a href="{% url "cats_shop:login" %}">Log in</a>
                     </li>
                     <li>
-                        <a href="/register/">New customer</a>
+                        <a href="{% url "cats_shop:register" %}">New customer</a>
                     </li>
                 {% endif %}
                     <li {% if cart.count > 0 %}class="active"{% endif %}>

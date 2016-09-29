@@ -1,51 +1,24 @@
 {% extends "cats_shop/base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block meta_title %}Log in{% endblock meta_title%}
 
+{% if request.GET.status_message %}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <p>{{ request.GET.status_message }}</p>
+      </div>
+    </div>
+  </div>
+{% endif %}
 
 {% block content %}
 
 <div class="container">
-  <div class="row">
-    <div class="text-center">
-      <div class="col-xs-12">
-        <h3>Log in</h3>
-      </div>
-    </div>
-  </div>
-
-  {% if request.GET.status_message %}
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <p>{{ request.GET.status_message }}</p>
-        </div>
-      </div>
-    </div>
-  {% endif %}
-
-  <form action="{% url 'cats_shop:login' %}" class="form-horizontal" method="post">
-     {% csrf_token  %}
-    <div class="form-group">
-      <label for="username" class="col-sm-2 control-label">User name</label>
-      <div class="col-sm-6">
-        <input type="text" class="form-control" id="username" name="username">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="password" class="col-sm-2 control-label">Password</label>
-      <div class="col-sm-6">
-        <input type="password" class="form-control" id="password" name="password">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Sign in</button>
-        <a href="{% url 'cats_shop:register'%}">Create new account </a>
-      </div>
-    </div>
-  </form>
+  {% crispy form %}
 </div>
 
 {% endblock content %}
