@@ -37,10 +37,12 @@ class OrderAddView(FormView):
         else:
             order = Order()
             form = OrderForm(request.POST, instance=order)
-            order = form.save(commit=False)
-            order.user = None
             if form.is_valid():
+                order = form.save(commit=False)
+                order.customer = request.user
                 form.save()
+            else:
+                return self.form_invalid(form)
             cart = Cart(request.session)
             for item in cart.items:
                 order_item = OrderPosition()
