@@ -3,8 +3,10 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView, DetailView, FormView
 
 from .models import Album, Cat, Order, OrderPosition
-from .forms import OrderForm
+from .forms import OrderForm, RegistrationForm, LoginForm
 from carton.cart import Cart
+
+from django.contrib.auth import authenticate, login, logout
 
 
 class CatsList(ListView):
@@ -47,3 +49,36 @@ class OrderAddView(FormView):
                 order_item.save()
             cart.clear()
             return super(OrderAddView, self).post(request, *args, **kwargs)
+
+
+class LoginFormView(FormView):
+    form_class = LoginForm
+    template_name = "cats_shop/login.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None and user.is_active:
+            login(self.request, user)
+            return super(LoginFormView, self).form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+class LogoutView(ListView):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect(reverse('cats_shop:index'))
+
+
+class RegisterFormView(FormView):
+    form_class = RegistrationForm
+    success_url = "/login/"
+    template_name = "cats_shop/register.html"
+
+    def form_valid(self, form):
+        form.save()
+        return super(RegisterFormView, self).form_valid(form)
