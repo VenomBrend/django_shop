@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.test import Client
 from cats_shop.models import Breed, Cat, CatColor
 from django.utils import timezone
 
@@ -30,8 +29,8 @@ class TestURLs(TestCase):
         test_color = CatColor(name='color1')
         test_color.save()
 
-        test_cat = Cat(breed=Breed(pk=test_breed.id), sex=1,
-                       cat_color=CatColor(pk=test_color.id), date=timezone.now(),
+        test_cat = Cat(breed=test_breed, sex=1,
+                       cat_color=test_color, date=timezone.now(),
                        price=100.00)
         test_cat.save()
 
