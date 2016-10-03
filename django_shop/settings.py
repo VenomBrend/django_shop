@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'cats_shop',
     'carton',
     'cart',
-    'django-shop',
+    'django_shop',
 )
 
 MIDDLEWARE_CLASSES = (
