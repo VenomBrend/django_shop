@@ -32,8 +32,8 @@ class OrderForm(ModelForm):
 
         self.helper.layout = Layout(
             self.helper.layout, FormActions(
-                Submit('add_button', ('Save'), css_class="btn btn-primary"),
-                Submit('cancel_button', ('Cancel'), css_class="btn btn-link"),
+                Submit('add_button', 'Save', css_class="btn btn-primary"),
+                Submit('cancel_button', 'Cancel', css_class="btn btn-link"),
             ))
 
 
