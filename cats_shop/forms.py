@@ -56,7 +56,7 @@ class RegistrationForm(UserCreationForm):
                 'username',
                 'password1',
                 'password2',
-                ButtonHolder(
+                FormActions(
                     Submit('register', 'Create', css_class='btn-primary'),
                 ))
 
@@ -76,7 +76,7 @@ class LoginForm(AuthenticationForm):
         self.helper.layout = Layout(
             'username',
             'password',
-            ButtonHolder(
+            FormActions(
                 Submit('login', 'Login', css_class='btn-primary')
             )
         )

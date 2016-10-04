@@ -72,7 +72,7 @@ class Order(models.Model):
     closed = models.DateTimeField(verbose_name='Closed at',
                                   blank=True,
                                   null=True)
-    status = EnumIntegerField(OrderStatusEnum, 
+    status = EnumIntegerField(OrderStatusEnum,
                               default=OrderStatusEnum.PROCESSING)
     customer = models.ForeignKey(User,
                                  blank=True,

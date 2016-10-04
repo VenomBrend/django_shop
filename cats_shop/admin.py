@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Breed, CatColor, Cat, Album, Order, OrderPosition
 
+
 class AlbumInline(admin.TabularInline):
     model = Album
     extra = 1
@@ -20,7 +21,7 @@ class OrderPositionInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderPositionInline, ]
-    readonly_fields = ['created',]
+    readonly_fields = ['created', ]
     list_display = ('id', 'price', 'customer', 'created')
 
 

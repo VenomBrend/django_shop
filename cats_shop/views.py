@@ -29,6 +29,13 @@ class OrderAddView(FormView):
         return u'%s?status_message=%s' % (reverse('cats_shop:index'),
                                           ('Order added successfully!'))
 
+    def get(self, request, *args, **kwargs):
+        initial_values = {'phone': request.user.profile.phone,
+                          'name': request.user.get_full_name(),
+                          'address': request.user.profile.address}
+        order_form = OrderForm(initial=initial_values)
+        return self.render_to_response(self.get_context_data(form=order_form))
+
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
             return HttpResponseRedirect(
