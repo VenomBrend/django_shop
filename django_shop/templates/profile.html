@@ -2,7 +2,12 @@
 
 {% block meta_title %}Profile{% endblock meta_title%}
 
-<div class="row">
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
   <div class="col-xs-12">
     {% if request.GET.status_message %}
       <div class="alert alert-warning" role="alert">
@@ -10,11 +15,7 @@
       </div>
     {% endif %}
   </div>
-</div>
-
-{% block content %}
-
-<div class="container">
+  </div>
   <div class="row">
     <div class="text-center">
       <div class="col-xs-12">
@@ -53,8 +54,9 @@
         <td>Joined:</td>
         <td>{{ user.date_joined }}</td>
       </tr>
-      {% endif %}
+      {% endif %}      
     </table>
+    <a class="btn btn-default" href="{% url "profile_edit" user.id %}" role="button">Edit Profile</a>
   </div>
 
     {% if orders %}
