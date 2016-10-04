@@ -17,6 +17,17 @@ class GenderEnum(Enum):
         FEMALE = 'Female'
 
 
+class OrderStatusEnum(Enum):
+    PROCESSING = 1
+    SHIPPED = 2
+    CLOSED = 3
+
+    class Labels:
+        PROCESSING = 'Processing'
+        SHIPPED = 'Shipped'
+        CLOSED = 'Closed'
+
+
 class Breed(models.Model):
     name = models.CharField(max_length=50, null=True)
     desc = models.CharField(max_length=256, blank=True, null=True)
@@ -39,6 +50,7 @@ class Cat(models.Model):
     date = models.DateField()
     desc = models.CharField(max_length=256, blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    in_stock = models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.id)
@@ -60,10 +72,8 @@ class Order(models.Model):
     closed = models.DateTimeField(verbose_name='Closed at',
                                   blank=True,
                                   null=True)
-    is_closed = models.BooleanField(default=False,
-                                    verbose_name='Is closed')
-    is_shipped = models.BooleanField(default=False,
-                                     verbose_name='Is shipped')
+    status = EnumIntegerField(OrderStatusEnum, 
+                              default=OrderStatusEnum.PROCESSING)
     customer = models.ForeignKey(User,
                                  blank=True,
                                  null=True)
