@@ -17,7 +17,13 @@
 {% block content %}
 
 <div class="container">
-  <h2>Edit {{ object.user.username }} Profile</h2>
+  <div class="row">
+    <div class="text-center">
+      <div class="col-xs-10">
+        <h3>Edit {{ user.username }} profile</h3>
+      </div>
+    </div>
+  </div>  
     <form action="{% url "profile_edit" user.id %}" class="form-horizontal" method="post">
       {% crispy user_edit_form %}
       {% crispy profile_edit_form %}
