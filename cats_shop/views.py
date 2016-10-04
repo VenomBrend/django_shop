@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 
 
 class CatsList(ListView):
-    queryset = Cat.objects.order_by('-date')
+    queryset = Cat.objects.filter(in_stock=True).order_by('-date')
     context_object_name = 'cats_list'
     template_name = 'cats_shop/index.html'
 
@@ -54,6 +54,8 @@ class OrderAddView(FormView):
             for item in cart.items:
                 order_item = OrderPosition()
                 order_item.order = order
+                item.product.in_stock = False
+                item.product.save()
                 order_item.product = item.product
                 order_item.save()
             cart.clear()
