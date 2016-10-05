@@ -30,10 +30,13 @@ class OrderAddView(FormView):
                                           ('Order added successfully!'))
 
     def get(self, request, *args, **kwargs):
-        initial_values = {'phone': request.user.profile.phone,
-                          'name': request.user.get_full_name(),
-                          'address': request.user.profile.address}
-        order_form = OrderForm(initial=initial_values)
+        if request.user.is_authenticated():
+            initial_values = {'phone': request.user.profile.phone,
+                              'name': request.user.get_full_name(),
+                              'address': request.user.profile.address}
+            order_form = OrderForm(initial=initial_values)
+        else:
+            order_form = OrderForm()
         return self.render_to_response(self.get_context_data(form=order_form))
 
     def post(self, request, *args, **kwargs):
@@ -42,24 +45,35 @@ class OrderAddView(FormView):
                 u'%s?status_message=%s' % (reverse('cats_shop:index'),
                                            ('Order adding canceled')))
         else:
-            order = Order()
-            form = OrderForm(request.POST, instance=order)
-            if form.is_valid():
-                order = form.save(commit=False)
-                order.customer = request.user
-                form.save()
-            else:
-                return self.form_invalid(form)
             cart = Cart(request.session)
-            for item in cart.items:
-                order_item = OrderPosition()
-                order_item.order = order
-                item.product.in_stock = False
-                item.product.save()
-                order_item.product = item.product
-                order_item.save()
-            cart.clear()
-            return super(OrderAddView, self).post(request, *args, **kwargs)
+
+            if cart.items:
+                order = Order()
+                form = OrderForm(request.POST, instance=order)
+
+                if form.is_valid():
+                    order = form.save(commit=False)
+                    if request.user.is_authenticated():
+                        order.customer = request.user
+                    else:
+                        order.customer = None
+                    form.save()
+                else:
+                    return self.form_invalid(form)
+
+                for item in cart.items:
+                    order_item = OrderPosition()
+                    order_item.order = order
+                    item.product.in_stock = False
+                    item.product.save()
+                    order_item.product = item.product
+                    order_item.save()
+                cart.clear()
+                return super(OrderAddView, self).post(request, *args, **kwargs)
+            else:
+                return HttpResponseRedirect(
+                    u'%s?status_message=%s' % (reverse('cats_shop:index'),
+                                               ('Your cart is empty')))
 
 
 class LoginFormView(FormView):
