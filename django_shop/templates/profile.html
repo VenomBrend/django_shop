@@ -1,0 +1,98 @@
+{% extends "cats_shop/base.html" %}
+
+{% block meta_title %}Profile{% endblock meta_title%}
+
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+  <div class="col-xs-12">
+    {% if request.GET.status_message %}
+      <div class="alert alert-warning" role="alert">
+        {{ request.GET.status_message }}
+      </div>
+    {% endif %}
+  </div>
+  </div>
+  <div class="row">
+    <div class="text-center">
+      <div class="col-xs-12">
+        <h3>{{ user.get_full_name|default:user.username }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="table">
+    <table class="table table-striped">
+      {% if user.email %}
+      <tr>
+        <td>Email:</td>
+        <td>{{ user.email }}</td>
+      </tr>
+      {% endif %}
+      {% if user.username %}
+      <tr>
+        <td>Username:</td>
+        <td>{{ user.username }}</td>
+      </tr>
+      {% endif %}
+      {% if user.profile.phone %}
+      <tr>
+        <td>Mobile phone:</td>
+        <td>{{ user.profile.phone }}</td>
+      </tr>
+      {% endif %}
+      {% if user.profile.address %}
+      <tr>
+        <td>Address:</td>
+        <td>{{ user.profile.address }}</td>
+      </tr>
+      {% endif %}
+      {% if user.date_joined %}
+      <tr>
+        <td>Joined:</td>
+        <td>{{ user.date_joined }}</td>
+      </tr>
+      {% endif %}      
+    </table>
+    <a class="btn btn-default" href="{% url "profile_edit" user.id %}" role="button">Edit Profile</a>
+  </div>
+
+    {% if orders %}
+      <div class="row">
+        <div class="text-center">
+          <div class="col-xs-12">
+            <h4>Orders</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="table">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Order id</th>
+            <th>Created</th>
+            <th>Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.created }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.status }}</td>
+        {% endfor %}  
+          </tr>          
+        </tbody>
+      </table>         
+      </div>
+    {% endif %}
+  
+</div>
+
+{% endblock content %}
+
+

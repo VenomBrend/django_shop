@@ -1,0 +1,38 @@
+{% extends "cats_shop/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block meta_title %}Update Profile{% endblock meta_title%}
+
+<div class="row">
+  <div class="col-xs-12">
+    {% if request.GET.status_message %}
+      <div class="alert alert-warning" role="alert">
+        {{ request.GET.status_message }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <div class="col-xs-10">
+        <h3>Edit {{ user.username }} profile</h3>
+      </div>
+    </div>
+  </div>  
+    <form action="{% url "profile_edit" user.id %}" class="form-horizontal" method="post">
+      {% crispy user_edit_form %}
+      {% crispy profile_edit_form %}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class="btn btn-primary" type="submit">Update Profile</button>
+        </div>
+      </div>
+    </form>      
+</div>
+
+{% endblock content %}
