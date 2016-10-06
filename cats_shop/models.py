@@ -2,10 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from enumfields import EnumIntegerField
 from enumfields import Enum  # Uses Ethan Furman's "enum34" backport
-import parser_breeds
 
 
-BREEDS = parser_breeds.get_breeds()
+
 
 
 class GenderEnum(Enum):
@@ -62,7 +61,6 @@ class Album(models.Model):
 
 
 class Order(models.Model):
-
     class Meta:
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
@@ -90,7 +88,6 @@ class Order(models.Model):
 
 
 class OrderPosition(models.Model):
-
     class Meta:
         verbose_name = 'Order position'
         verbose_name_plural = 'Order positions'

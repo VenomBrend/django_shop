@@ -1,0 +1,5 @@
+include  cats_shop/static/cats_shop/*
+include cats_shop/templates/cats_shop/*
+include  cart/templates/*
+include  media/cats/*
+exclude  fabfile.py
