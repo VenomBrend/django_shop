@@ -4,9 +4,6 @@ from enumfields import EnumIntegerField
 from enumfields import Enum  # Uses Ethan Furman's "enum34" backport
 
 
-
-
-
 class GenderEnum(Enum):
     MALE = 1
     FEMALE = 2
@@ -46,7 +43,7 @@ class Cat(models.Model):
     breed = models.ForeignKey(Breed)
     sex = EnumIntegerField(GenderEnum)
     cat_color = models.ForeignKey(CatColor)
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     desc = models.CharField(max_length=256, blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     in_stock = models.BooleanField(default=True)
@@ -56,8 +53,8 @@ class Cat(models.Model):
 
 
 class Album(models.Model):
-    cat = models.ForeignKey(Cat)
-    photo = models.ImageField(upload_to='cats')
+    cat = models.ForeignKey(Cat, related_name='album')
+    photo = models.ImageField()
 
 
 class Order(models.Model):

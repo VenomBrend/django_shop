@@ -9,7 +9,7 @@ class AlbumInline(admin.TabularInline):
 
 class CatAdmin(admin.ModelAdmin):
     fields = ['breed', 'cat_color', 'sex', 'desc',
-              'date', 'price', 'in_stock']
+              'price', 'in_stock']
     inlines = [AlbumInline, ]
     list_display = ('breed', 'cat_color', 'price', 'date')
 

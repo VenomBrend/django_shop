@@ -25,7 +25,7 @@
 
 
             <div class="col-md-6">
-                {% for album in cat.album_set.all %}
+                {% for album in cat.album.all %}
                 <div class="thumbnail2">
                     <img class="img-responsive" src="{{ album.photo.url }}" alt="">
                     <br>
@@ -37,6 +37,7 @@
                         <p>Sex: {{cat.sex}}</p>
                         <p>Color: {{cat.cat_color}}</p>
                         <p>Date added: {{cat.date}}</p>
+                        <p> <a href="{% url "cart:shopping-cart-add" cat.id %}" class="btn btn-primary">Add to Cart</a></p>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ def breeds_parse(response, parsed_body):
 
 breeds_list = breeds_parse(response, parsed_body)
 
-os.makedirs(MEDIA_ROOT + '/cats', exist_ok=True)
+os.makedirs(MEDIA_ROOT, exist_ok=True)
 
 def images_parse(response, parsed_body, breeds_list):
 
@@ -45,7 +45,7 @@ def images_parse(response, parsed_body, breeds_list):
 
         r = requests.get(full_image_absolute_url)
 
-        with open(MEDIA_ROOT + '/cats/%s' % breeds_list.pop(), 'wb') as f:
+        with open(MEDIA_ROOT + '/%s' % breeds_list.pop(), 'wb') as f:
             f.write(r.content)
 
 images_parse(response, parsed_body, breeds_list)
@@ -73,5 +73,5 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(breeds_filling),
-        migrations.RunPython(colors_filling),
+        migrations.RunPython(colors_filling),        
 ]
