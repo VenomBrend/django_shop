@@ -38,12 +38,12 @@
         {% for cat in cats_list %}
         <div class="text-center">
             <div class="col-md-3 col-sm-6 hero-feature">
-                {% for album in cat.album_set.all %}
+                {% for album in cat.album.all %}
                 {% if forloop.first %}
                 <div class="thumbnail">
                     <img src="{{ album.photo.url }}" alt="">
-                    {% endif %}
-                    {% endfor %}
+                {% endif %}
+                {% endfor %}
                     <div class="caption">
                         <h3>{{cat.breed}}</h3>
                         <p>{{cat.breed.desc}}</p>
