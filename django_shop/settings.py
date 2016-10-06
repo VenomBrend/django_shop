@@ -109,7 +109,7 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'cats_shop/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/cats')
 
 
 CART_PRODUCT_MODEL = 'cats_shop.models.Cat'
