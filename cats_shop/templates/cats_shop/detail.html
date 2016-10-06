@@ -37,6 +37,7 @@
                         <p>Sex: {{cat.sex}}</p>
                         <p>Color: {{cat.cat_color}}</p>
                         <p>Date added: {{cat.date}}</p>
+                        <p> <a href="{% url "cart:shopping-cart-add" cat.id %}" class="btn btn-primary">Add to Cart</a></p>
                     </div>
                 </div>
             </div>
