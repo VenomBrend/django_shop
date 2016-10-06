@@ -1,5 +1,5 @@
-recursive-include  cats_shop/static/*
-recursive-include cats_shop/templates/*
-recursive-include  cart/templates/*
-recursive-include  media/cats/*
+include  cats_shop/static/cats_shop/*
+include cats_shop/templates/cats_shop/*
+include  cart/templates/*
+include  media/cats/*
 exclude  fabfile.py
